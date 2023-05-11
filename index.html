@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Chatbot with Music</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+</head>
+
+<body>
+
+  <div id="audio-container">
+    <audio id="audio-player" autoplay loop>
+      <source src="doctor.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+    <i id="mute-button" class="bi bi-volume-up-fill"></i>
+  </div>
+
+  <div class="box">
+    <div class="top">
+      <h1>Chatbot</h1>
+    </div>
+    <div class="mid">
+      <div class="chat">
+        <h2>Chat Log:</h2>
+        <p id="chatLog"></p>
+      </div>
+      <div class="input">
+        <input type="text" id="userBox" placeholder="Type your message..." onkeydown="if(event.keyCode==13) talk()"
+          autofocus>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+
+    function talk() {
+      var input = document.getElementById("userBox").value.toLowerCase();
+      var know = {
+        "hi": "Hey, MahdiChatBot Here How can i help you ?.",
+        "slm": "English Please",
+        "ahla": "English Please",
+        "hello": "Hey, MahdiChatBot Here How can i help you ?.",
+        "how are you": "I'm fine, thanks for asking.",
+        "what is your name": "My name is MahdiChatBot.",
+        "how old are you": "I'm 1 day old.",
+        "who is going to win the world cup": "Argentina ofc.",
+        "who is Mahdi": "Mahdi is the best programmer in the world.",
+        "what is the problem of python chatbot": "I don't know, ask Mahdi.",
+        "what is your favorite color": "My favorite color is blue.",
+        "what is your favorite food": "My favorite food is pizza.",
+        "what is your favorite movie": "My favorite movie is The Matrix.",
+        "what is your favorite song": "My favorite song is 'The Sound of Silence' by Disturbed.",
+        "what is your favorite book": "My favorite book is 'The Alchemist' by Paulo Coelho.",
+        "what is your favorite game": "My favorite game is 'The Witcher 3: Wild Hunt'.",
+        "what is your favorite sport": "My favorite sport is football.",
+        "what is your favorite team": "My favorite team is Club Africain.",
+        "what is your favorite country": "My favorite country is Tunisia.",
+        "what is your favorite city": "My favorite city is Tunis.",
+        "what is your favorite language": "My favorite language is JavaScript.",
+        "what is your favorite framework": "My favorite framework is React.",
+        "what is your favorite doctor": "My favorite doctor is Dr. Mohamed Ben Salah.",
+        "what is your favorite hospital": "My favorite hospital is MahdiHospital.",
+        "what is your favorite medicine": "My favorite medicine is 'Paracetamol'.",
+        "i have a sore throat": "You should have a fruit salad and take a cup of tea:)",
+        "i have a flu": "You should take a cup of tea and have a rest.",
+        "i have a diarrhea": "You should take a cup of tea and have a rest.",
+        "i have a vomiting": "You should take a cup of tea and have a rest.",
+        "i have a nausea": "You should take a cup of tea and have a rest.",
+        "i have a dizziness": "You should take a cup of tea and have a rest.",
+        "i have a fatigue": "You should take a cup of tea and have a rest.",
+        "i have a insomnia": "You should take a cup of tea and have a rest.",
+        "i have a headache": "Don't worry just relax and drink plenty of water:)",
+        "i have a stomach ache": "Hydration.Drink plenty of water or a hydration formula:)",
+        "i have a stomach pain": "Hydration.Drink plenty of water or a hydration formula:)",
+        "i have a fever": "You should take a paracetamol and drink plenty of water:)",
+        "i have a cold": "You should take a paracetamol and drink plenty of water:)",
+        "i have a cough": "You should take a paracetamol and drink plenty of water:)",
+        "i have a back pain": "Stay active and try to continue with your daily activities:)",
+        "i have an eye pain": "Conatact Dr. George Smith: 58 848 051 now:)",
+        "i have an ear pain": "Conatact Dr. Jalel Kadri: 58 848 051 now:)",
+        "i have a toothache": "Conatact Dr. Mohamed Ben Salah: 58 848 051 now:)",
+        "i have a nose pain": "drink plenty of fluids:)",
+        "i have a leg pain": "Conatact Dr. Mohamed Ben Ghorbel: 58 848 051 now:)",
+        "i have a hand pain": "Ice and heat:)",
+        "i have a foot pain": "rest and raise your foot when you can:)",
+        "i have a neck pain": "put heat or cold packs on your neck:)",
+        "i have a shoulder pain": "Rest your shoulder for the next few days:)",
+        "i have a chest pain": "Conatact Dr. Mohamed Ben Salah: 58 848 051 now:)",
+        "i have a heart pain": "Conatact Dr. Mohamed Ben Salah: 58 848 051 now:)",
+        "i have a heart attack": "Conatact Dr. Mohamed Ben Salah: 58 848 051 now:)",
+        "i have a heart disease": "Conatact Dr. Mohamed Ben Salah: 58 848 051 now:)",
+        "i have a heart problem": "Conatact Dr. Mohamed Ben Salah: 58 848 051 now:)",
+        "i have a heart failure": "Conatact Dr. Mohamed Ben Salah: 58 848 051 now:)",
+        "i have a heart arrhythmia": "Conatact Dr. Mohamed Ben Salah: 58 848 051 now:)",
+        "i have a heart murmur": "Conatact Dr. Mohamed Ben Salah: 58 848 051 now:)",
+        "i have a heart valve problem": "Conatact Dr. Mohamed Ben Salah: 58 848 051 now:)",
+        "i want to see doctor now": "Dr Samuel Goe: 54 610 012 and Dr Tanya Collins: 24 034 221:)",
+        "i need a doctor": "Dr Samuel Goe: 54 610 012 and Dr Tanya Collins: 24 034 221:)",
+        "call me a doctor": "Dr Samuel Goe: 54 610 012 and Dr Tanya Collins: 24 034 221:)",
+        "i want to see dentist now": "Dr. John Smith: 55 611 011 and Dr. Mary Smith: 20 034 111:)",
+        "i want to see optician now": "Dr. George Smith: 58 848 051 :)",
+        "i want to see physiotherapist now": "Dr Mahdi Goe: 50 600 011 :)",
+        "i want to see pharmacist now": "Dr. John Smith: 99 100 555:)",
+        "i want to see psychologist now": "Dr. Mahdi Smith: 99 100 555:)",
+        "i want to see psychiatrist now": "Dr. Mahdi Smith: 90 101 555:)",
+        "i want to see gynecologist now": "Dr. Mohamed Smith: 91 100 501:)",
+        "i want to see cardiologist now": "Dr. Elizabeth Ira: 94 957 001:)",
+        "i want to see dermatologist now": "Dr. John Smith: 99 100 555:)",
+        "i want to see endocrinologist now": "Dr. Omar Ben Sallem: 95 100 555:)",
+        "i'm pregnant": "Congratulations, you should contact Dr. Mohamed Ben Salah: 58 848 051 now:)",
+        "i'm not pregnant": "You should contact Dr. Mohamed Ben Salah: 58 848 051 now:)",
+        "i'm afraid": "Don't worry we will take care of this together:)",
+        "i love you": "I love you too.",
+        "i hate you": "I hate you too.",
+        "i'm bored": "You should play a game.",
+        "i'm hungry and thirsty": "You should eat and drink something.",
+        "i'm tired and sleepy": "You should have a rest.",
+        "i'm sad": "Don't worry, everything will be fine.",
+        "i'm happy": "I'm happy too.",
+        "i'm angry": "Don't worry, everything will be fine.",
+        "i'm confused": "Don't worry, everything will be fine.",
+        "i'm scared": "Don't worry, everything will be fine.",
+        "i'm excited and nervous": "Don't worry, everything will be fine.",
+        "thank you": "You're welcome.",
+        "bye": "Take care:).."
+      };
+      var user = document.getElementById('userBox').value.toLowerCase();
+      document.getElementById('chatLog').innerHTML = user + "<br>";
+      document.getElementById("userBox").value = "";
+      if (user in know) {
+        document.getElementById('chatLog').innerHTML = know[user] + "<br>";
+      } else {
+        document.getElementById('chatLog').innerHTML = "Sorry,I didn't understand <br>";
+        document.getElementById("userBox").value = "";
+      }
+    }
+
+  </script>
+  <script>
+    var audioPlayer = document.getElementById('audio-player');
+    var muteButton = document.getElementById('mute-button');
+    var isMuted = false;
+
+    // Event listener for the mute button
+    muteButton.addEventListener('click', function () {
+      if (isMuted) {
+        audioPlayer.volume = 1; // Unmute the audio
+        muteButton.classList.remove('bi-volume-mute-fill');
+        muteButton.classList.add('bi-volume-up-fill');
+      } else {
+        audioPlayer.volume = 0; // Mute the audio
+        muteButton.classList.remove('bi-volume-up-fill');
+        muteButton.classList.add('bi-volume-mute-fill');
+      }
+      isMuted = !isMuted;
+    });
+  </script>
+</body>
+
+</html>
